@@ -4,29 +4,20 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Task 2: Static middleware
-app.use(express.static('public'));
+// Static files middleware
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Optional logging middleware
+// Request logging middleware
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
 });
 
-// Task 3: Route handlers
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Import router (Bonus task)
+const pageRoutes = require('./routes/pages');
+app.use('/', pageRoutes);
 
-app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'about.html'));
-});
-
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
-});
-
-// Task 4: API endpoint
+// API endpoint
 app.get('/api/time', (req, res) => {
     res.json({
         datetime: new Date().toISOString(),
@@ -34,12 +25,12 @@ app.get('/api/time', (req, res) => {
     });
 });
 
-// Task 5: 404 handler
+// 404 handler
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
-// Task 5: 500 error handler
+// 500 error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).sendFile(path.join(__dirname, 'public', '500.html'));

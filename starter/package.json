@@ -1,7 +1,7 @@
 {
-  "name": "express-workshop03",
+  "name": "workshop03-express",
   "version": "1.0.0",
-  "description": "Express.js Web Server Workshop",
+  "description": "Workshop 03 Express Web Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,6 +13,6 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.3"
   }
 }
